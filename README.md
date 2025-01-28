@@ -4,4 +4,4 @@ This is the repository for the website meant to document as much information as 
 
 This project is fully open source, so create pull requests if you want.
 
-If you don't know how to code, create a file named "[language name].md".
+If you don't know how to code, create a thread in the discussion tab.
