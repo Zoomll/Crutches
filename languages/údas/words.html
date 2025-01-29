@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Index</title>
+</head>
+<body>
+    <h1>File List</h1>
+    <ul id="file-list">Loading...</ul>
+
+    <script>
+      // thx ChatGPT <3
+        const username = "yourusername"; // Change to your GitHub username
+        const repo = "repository-name"; // Change to your repository name
+        const branch = "main"; // Change to the default branch
+        const directory = ""; // Change if files are inside a subdirectory
+
+        const fileList = document.getElementById("file-list");
+
+        async function fetchFiles() {
+            const url = `https://api.github.com/repos/${username}/${repo}/contents/${directory}?ref=${branch}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("GitHub API limit exceeded or invalid response");
+                
+                const files = await response.json();
+                fileList.innerHTML = ""; // Clear "Loading..." text
+
+                files.forEach(file => {
+                    if (file.type === "file") {
+                        const li = document.createElement("li");
+                        const a = document.createElement("a");
+                        a.href = `https://${username}.github.io/${repo}/${file.path}`;
+                        a.textContent = file.name;
+                        li.appendChild(a);
+                        fileList.appendChild(li);
+                    }
+                });
+            } catch (error) {
+                fileList.innerHTML = `<li>Error fetching file list: ${error.message}</li>`;
+            }
+        }
+
+        fetchFiles();
+    </script>
+</body>
+</html>
