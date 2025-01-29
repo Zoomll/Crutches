@@ -1,4 +1,4 @@
-p {
+p, a {
   text-align: center;
-  text-size: 20px
+  font-size: 20px
 }
